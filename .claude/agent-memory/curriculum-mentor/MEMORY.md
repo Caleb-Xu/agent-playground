@@ -7,14 +7,14 @@
 - 教学要点：Python 讲解要用 JS 做对比
 
 ## Current Progress
-- 阶段：Phase 0 - Python 基础（第1课，共4课）
-- 当前任务：phase-0-python-basics/01-python-for-js-devs.md（练习2进行中）
-- 已完成的课程任务：01-python-for-js-devs 练习1
+- 阶段：Phase 0 - Python 基础（第2课，共4课）
+- 当前任务：phase-0-python-basics/02-pydantic-and-types.md（未开始）
+- 已完成的课程任务：01-python-for-js-devs 全部（练习1、2、3）
 
 ## Topics Status
 | 主题 | 状态 |
 |------|------|
-| Python 基础语法 (01) | 进行中 - 第一次学习 |
+| Python 基础语法 (01) | 已完成 |
 | Pydantic & 类型注解 (02) | 未开始 |
 | asyncio (03) | 未开始 |
 | uv & 工具链 (04) | 未开始 |
@@ -37,7 +37,9 @@
 
 ## Student Weak Points
 - **dict 点语法 vs 方括号**：多次把 `stats.score` 写成 JS 对象点语法，Python dict 读取和赋值都需要 `d["key"]`，需要持续强化
-- f-string 的 `f` 前缀容易遗漏（把 JS 的 `${}` 和 Python 的 `f""` 混淆）
+- **f-string 的 `f` 前缀**：容易遗漏，把 JS 的 `${}` 和 Python 的 `f""` 混淆
+- **`__init__` 里初始化属性**：容易忘记在构造函数里初始化 `self.tools = []` 这类默认属性
+- **列表推导式条件**：第一次不知道条件部分就是普通布尔表达式，需要明确说明
 
 ## Effective Teaching Approaches
 （学习过程中记录）
