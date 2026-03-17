@@ -43,3 +43,51 @@
 
 ## Effective Teaching Approaches
 （学习过程中记录）
+
+## 硬性检查点：进入 Phase 1 之前
+
+在学生完成 Phase 0 第 04 课（uv & 工具链）之后、开始 Phase 1 之前，**必须主动核查**下方清单。逐项确认是否已经在课程中讲过，没讲过的在这一关统一补充，全部打勾后才能推进到 Phase 1。
+
+- [ ] 继承语法 `class Child(Parent):`，`super().__init__()`
+- [ ] `isinstance()` 检查继承关系
+- [ ] `tuple` 是不可变序列，多返回值本质是 tuple
+- [ ] `set` 的用法和集合运算
+- [ ] `*args` 和 `**kwargs` 的定义与调用
+- [ ] `func(**dict)` 展开字典作为关键字参数
+- [ ] `enumerate()` 和 `zip()`
+- [ ] dict comprehension `{k: v for k, v in ...}`
+- [ ] 装饰器 `@` 的本质（语法糖）
+- [ ] `with` 语句（上下文管理器）
+
+## Curriculum Gaps — 上课时自然补充
+
+以下知识点在教案中缺失，但学生在练习中已遇到困惑。**不需要单独开一节课讲**，在后续课程遇到相关代码时自然插入解释即可。
+
+### Python OOP 继承体系（遇到 `class Foo(Bar)` 时补充）
+- 继承语法：`class Child(Parent):` 等同于 JS 的 `extends`
+- `super().__init__(...)` 调用父类构造函数
+- 多重继承：`class C(A, B):`，Python 支持，JS 不支持
+- `isinstance(obj, ClassName)` 检查继承关系，子类实例也返回 True
+- Python 内置基础类型总览：`int`, `float`, `str`, `bool`, `list`, `tuple`, `dict`, `set`, `None`
+- **tuple 重点**：不可变有序序列，函数多返回值本质是 tuple，`a, b = func()` 就是 tuple 解包
+
+### 函数调用方式（遇到 `**kwargs` 或函数传参时补充）
+- `*args`：接收任意数量位置参数，等同于 JS 的 `...args`
+- `**kwargs`：接收任意关键字参数，等同于 JS 的 `options = {}`
+- `func(**dict)`：把字典展开成关键字参数传入（`RepoInfo(**data)` 用的就是这个）
+- 调用时可以混用：`func(a, b, key=val)`
+
+### 解构/解包（遇到赋值解包时补充）
+- `_` 忽略某个值：`_, second = (10, 20)`
+- `enumerate(items)`：同时拿到索引和值，替代 `items.forEach((item, i) => ...)`
+- `zip(a, b)`：同时遍历两个列表
+- dict comprehension：`{k: v for k, v in items.items()}`
+
+### 装饰器 `@`（遇到 `@` 语法时补充）
+- `@decorator` 是语法糖，等价于 `func = decorator(func)`
+- 常见内置装饰器：`@property`（把方法变属性）、`@classmethod`、`@staticmethod`
+- Pydantic 里的 `@field_validator` 就是自定义装饰器
+
+### `with` 语句（遇到文件/HTTP 操作时补充）
+- 上下文管理器，等同于 JS 的 `try/finally` 自动清理
+- 常见场景：`with open("f.txt") as f:`，`async with client.stream(...) as r:`
