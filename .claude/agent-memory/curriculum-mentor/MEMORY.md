@@ -7,15 +7,15 @@
 - 教学要点：Python 讲解要用 JS 做对比
 
 ## Current Progress
-- 阶段：Phase 0 - Python 基础（第2课，共4课）
-- 当前任务：phase-0-python-basics/02-pydantic-and-types.md（未开始）
-- 已完成的课程任务：01-python-for-js-devs 全部（练习1、2、3）
+- 阶段：Phase 0 - Python 基础（第3课，共4课）
+- 当前任务：phase-0-python-basics/03-async-python.md（未开始）
+- 已完成的课程任务：01-python-for-js-devs 全部（练习1、2、3）；02-pydantic-and-types 全部（练习1、2、3）
 
 ## Topics Status
 | 主题 | 状态 |
 |------|------|
 | Python 基础语法 (01) | 已完成 |
-| Pydantic & 类型注解 (02) | 未开始 |
+| Pydantic & 类型注解 (02) | 已完成 |
 | asyncio (03) | 未开始 |
 | uv & 工具链 (04) | 未开始 |
 | Tool Agent | 未开始 |
@@ -32,7 +32,7 @@
 
 ## Project Structure
 - 练习目录：`practice/`，结构镜像 `curriculum/`，各课练习放对应子目录
-- 当前练习目录：`practice/phase-0-python-basics/01-python-for-js-devs/`
+- 当前练习目录：`practice/phase-0-python-basics/02-pydantic-and-types/`
 - 文件命名规范：`exercise_01.py`, `exercise_02.py` ...
 
 ## Student Weak Points
