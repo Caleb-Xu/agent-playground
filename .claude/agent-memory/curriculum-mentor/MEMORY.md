@@ -7,9 +7,9 @@
 - 教学要点：Python 讲解要用 JS 做对比
 
 ## Current Progress
-- 阶段：Phase 0 - Python 基础（第4课，共4课）
-- 当前任务：phase-0-python-basics/04-uv-toolchain.md（未开始）
-- 已完成的课程任务：01-python-for-js-devs 全部（练习1、2、3）；02-pydantic-and-types 全部（练习1、2、3）；03-async-python 全部（练习1、2、3 + 复习测验）
+- 阶段：Phase 1 - Tool Agent（第1课，共3课）
+- 当前任务：phase-1-tool-agent/01-agent-basics.md（进行中）
+- 已完成的课程任务：Phase 0 全部（01~03 + 练习）；Phase 0 前置知识补充（tuple/set/*args/**kwargs/zip/dict comprehension/装饰器/with）；uv & 工具链（04）已跳过/快速完成
 
 ## Topics Status
 | 主题 | 状态 |
@@ -17,8 +17,10 @@
 | Python 基础语法 (01) | 已完成 |
 | Pydantic & 类型注解 (02) | 已完成 |
 | asyncio (03) | 已完成 |
-| uv & 工具链 (04) | 未开始 |
-| Tool Agent | 未开始 |
+| uv & 工具链 (04) | 已完成 |
+| Phase 1 - Tool Agent 01: Agent 基础概念 | 进行中 |
+| Phase 1 - Tool Agent 02: First Agent | 未开始 |
+| Phase 1 - Tool Agent 03: GitHub Repo Analyzer | 未开始 |
 | ReAct Agent | 未开始 |
 | Plan-Execute | 未开始 |
 | RAG | 未开始 |
