@@ -7,16 +7,16 @@
 - 教学要点：Python 讲解要用 JS 做对比
 
 ## Current Progress
-- 阶段：Phase 0 - Python 基础（第3课，共4课）
-- 当前任务：phase-0-python-basics/03-async-python.md（未开始）
-- 已完成的课程任务：01-python-for-js-devs 全部（练习1、2、3）；02-pydantic-and-types 全部（练习1、2、3）
+- 阶段：Phase 0 - Python 基础（第4课，共4课）
+- 当前任务：phase-0-python-basics/04-uv-toolchain.md（未开始）
+- 已完成的课程任务：01-python-for-js-devs 全部（练习1、2、3）；02-pydantic-and-types 全部（练习1、2、3）；03-async-python 全部（练习1、2、3 + 复习测验）
 
 ## Topics Status
 | 主题 | 状态 |
 |------|------|
 | Python 基础语法 (01) | 已完成 |
 | Pydantic & 类型注解 (02) | 已完成 |
-| asyncio (03) | 未开始 |
+| asyncio (03) | 已完成 |
 | uv & 工具链 (04) | 未开始 |
 | Tool Agent | 未开始 |
 | ReAct Agent | 未开始 |
@@ -32,7 +32,7 @@
 
 ## Project Structure
 - 练习目录：`practice/`，结构镜像 `curriculum/`，各课练习放对应子目录
-- 当前练习目录：`practice/phase-0-python-basics/02-pydantic-and-types/`
+- 当前练习目录：`practice/phase-0-python-basics/04-uv-toolchain/`
 - 文件命名规范：`exercise_01.py`, `exercise_02.py` ...
 
 ## Student Weak Points
@@ -40,9 +40,10 @@
 - **f-string 的 `f` 前缀**：容易遗漏，把 JS 的 `${}` 和 Python 的 `f""` 混淆
 - **`__init__` 里初始化属性**：容易忘记在构造函数里初始化 `self.tools = []` 这类默认属性
 - **列表推导式条件**：第一次不知道条件部分就是普通布尔表达式，需要明确说明
+- **遗漏 `await`**：去掉 `await` 不会报错，协程对象静默失效，调试困难；需在每次涉及 async 代码时主动提醒
 
 ## Effective Teaching Approaches
-（学习过程中记录）
+- 新语法在练习文件中出现时，**主动解释**，不等学生提问——见 `feedback_proactive_syntax.md`
 
 ## 硬性检查点：进入 Phase 1 之前
 
