@@ -1,5 +1,6 @@
 import json
-import asyncio
+import os
+from .models import RepoReport
 from anthropic import AsyncAnthropic
 from dotenv import load_dotenv
 from .tools import TOOLS, TOOL_FUNCTIONS
@@ -7,7 +8,7 @@ from .tools import TOOLS, TOOL_FUNCTIONS
 load_dotenv()
 client = AsyncAnthropic()
 
-async def run_agent(user_message: str) -> str:
+async def run_agent(user_message: str, max_steps: int = 10) -> RepoReport | str:
     """
     运行 Agent，接受用户问题，返回最终回答。
     """
@@ -18,17 +19,35 @@ async def run_agent(user_message: str) -> str:
 
     # Agent Loop
     step = 0
-    while True:
+    while step < max_steps:
         step += 1
-        print(f"\n[Step {step}] 调用 LLM...")
+        print(f"\n[Step {step}/{max_steps}] 调用 LLM...")
 
         response = await client.messages.create(
-            model="claude-sonnet-4-6",
+            model=os.environ.get("ANTHROPIC_DEFAULT_MODEL"),
             max_tokens=4096,
             tools=TOOLS,
             messages=messages,
-            system="你是一个 GitHub 仓库分析助手。使用提供的工具来获取信息，然后给出详细分析。"
+            system = """
+                你是一个 GitHub 仓库分析助手。使用提供的工具获取信息后，
+                你必须以 JSON 格式输出最终报告，不要输出任何其他文字。
+
+                JSON 格式如下：
+                {
+                "repo_name": "owner/repo",
+                "stars": 12000,
+                "primary_language": "TypeScript",
+                "description": "仓库描述",
+                "top_languages": ["TypeScript", "JavaScript"],
+                "recent_commits": [
+                    {"sha": "abc1234", "author": "张三", "message": "fix: 修复登录问题"}
+                ],
+                "summary": "一段 2-3 句话的综合分析"
+                }
+            """
         )
+
+        print(f"  token 用量: input={response.usage.input_tokens}, output={response.usage.output_tokens}")
 
         # 把 LLM 回复加入历史
         messages.append({"role": "assistant", "content": response.content})
@@ -36,9 +55,10 @@ async def run_agent(user_message: str) -> str:
         # 判断下一步
         if response.stop_reason == "end_turn":
             for block in response.content:
-                if hasattr(block, "text"):
-                    print(f"\n最终回答：\n{block.text}")
-                    return block.text
+                if hasattr(block, "text") and block.text.strip():
+                    data = json.loads(block.text)
+                    report = RepoReport(**data)
+                    return report
 
         elif response.stop_reason == "tool_use":
             tool_results = []

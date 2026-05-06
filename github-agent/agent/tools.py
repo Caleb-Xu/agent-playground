@@ -30,6 +30,24 @@ TOOLS = [
             },
             "required": ["repo_name"]
         }
+    },
+    {
+        "name": "get_recent_commits",
+        "description": "获取仓库最近的提交",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "repo_name": {
+                    "type": "string",
+                    "description": "仓库全名，格式：owner/repo"
+                },
+                "per_page": {
+                    "type": "integer",
+                    "description": "返回条数，默认为5"
+                }
+            },
+            "required": ["repo_name"]
+        }
     }
 ]
 
@@ -60,8 +78,25 @@ async def get_repo_languages(repo_name: str) -> dict[str, int]:
         )
         return response.json()
 
+async def get_recent_commits(repo_name: str, per_page: int = 5) -> list:
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"https://api.github.com/repos/{repo_name}/commits?per_page={per_page}"
+        )
+        return [
+            {
+                "sha": commit["sha"][:7],
+                "author": commit["commit"]["author"]["name"],
+                "date": commit["commit"]["author"]["date"],
+                "message": commit["commit"]["message"]
+            }
+            for commit in response.json()
+        ]
+
+
 # 工具名 → 函数 的映射（用于 agent 执行时查找）
 TOOL_FUNCTIONS = {
     "get_repo_info": get_repo_info,
     "get_repo_languages": get_repo_languages,
+    "get_recent_commits": get_recent_commits
 }

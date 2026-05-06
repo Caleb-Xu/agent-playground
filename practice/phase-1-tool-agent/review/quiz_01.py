@@ -1,7 +1,7 @@
-# Phase 1 - Lesson 02 复习测验
+# Phase 1 复习测验 01
 # 在下面每道题的空白处写你的答案，写完告诉老师
 #
-# 覆盖范围：实现第一个 Agent（tools.py / core.py / main.py）
+# 覆盖范围：Lesson 02 - First Agent
 # ============================================================
 
 
@@ -10,14 +10,15 @@
 # 下面 4 个文件分别负责什么？请用一句话写出每个文件的职责。
 # ============================================================
 
-# agent/__init__.py ：毫无作用
+# agent/__init__.py ： 不知道啊，文件里是空的
 #
-# agent/tools.py ：定义并实现agent工具集
+# agent/tools.py ：维护工具的定义与实现
 #
-# agent/core.py ：定义并实现agent与agent工作流
+# agent/core.py ：agent定义与执行实现
 #
-# main.py ：调用agent
+# main.py ：程序入口文件
 #
+
 
 # ============================================================
 # 第 2 题 — 发现 bug
@@ -31,11 +32,11 @@ async def execute_tool(tool_name: str, tool_input: dict):
         return await tool_fn(tool_input)
     return {"error": f"未知工具: {tool_name}"}
 
-# 你的说明：
-# tool_fn(tool_input)没有将工具入参展开
+# 你的说明：没有在调用函数时使用 `**` 展开字典入参
+#
 
-# 改正后的代码：
-# tool_fn(**tool_input)
+# 改正后的代码：return await tool_fn(**tool_input)
+#
 
 
 # ============================================================
@@ -44,17 +45,17 @@ async def execute_tool(tool_name: str, tool_input: dict):
 # 请写出每一轮 while 循环里，stop_reason 会依次是什么。
 # ============================================================
 
-# 第 1 轮：tool_use
-# 第 2 轮：tool_use
-# 第 3 轮：end_turn
+# 第 1 轮 stop_reason = tool_use
+# 第 2 轮 stop_reason = tool_use
+# 第 3 轮 stop_reason = end_turn
 #
-# 并用一句话解释为什么：
-# 因为只有tool_use才会有下一轮的请求，所以需要有两次tool_use，然后最后一次是end_turn来中止循环
+# 并用一句话解释为什么第 3 轮不再调用工具：因为大模型已经完成了它的任务并返回 end_turn
+#
 
 
 # ============================================================
-# 第 4 题 — messages 顺序
-# 请把下面 4 个事件按正确执行顺序排序。
+# 第 4 题 — 排序题
+# 请把下面 4 个事件按正确执行顺序排序（写字母序列即可，例如 A→C→B→D）
 # ============================================================
 
 # A. 把 tool_results append 到 messages 里
@@ -62,15 +63,15 @@ async def execute_tool(tool_name: str, tool_input: dict):
 # C. 执行 tool_fn，得到 result
 # D. 把 assistant 的 response.content append 到 messages 里
 
-# 正确顺序：
-# B D C A
+# 正确顺序：B→D→C→A
+#
 
 
 # ============================================================
 # 第 5 题 — 开放题
-# 为什么 tools.py 里要把"工具定义"和"工具实现"分开？
+# 为什么 tools.py 里要把“工具定义”（TOOLS 列表）和“工具实现”（Python 函数）分开？
 # 用你自己的话回答，1-3 句话即可。
 # ============================================================
 
-# 你的答案：
-# 1、LLM只需要工具定义的信息，不需要工具实现的信息，2、方便扩展，降低耦合度
+# 你的答案：因为大模型只关注定义，不关注实现，分开后后续如果项目规模起来之后，可以顺势做分层处理
+#
